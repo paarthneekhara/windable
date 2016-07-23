@@ -314,9 +314,6 @@ var _palettes = require('./../utilities/palettes');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// Wind velocity at which particle intensity is maximum (m/s).
-// const MAX_WIND_INTENSITY = 30;
-
 // Max number of frames a particle is drawn before regeneration.
 var MAX_PARTICLE_AGE = 100;
 

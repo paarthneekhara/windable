@@ -27,9 +27,6 @@ import {getAnimationFrame, isValue} from './../utilities/functions';
 import {math} from './../utilities/math';
 import {palettes} from './../utilities/palettes';
 
-// Wind velocity at which particle intensity is maximum (m/s).
-// const MAX_WIND_INTENSITY = 30;
-
 // Max number of frames a particle is drawn before regeneration.
 const MAX_PARTICLE_AGE = 100;
 
