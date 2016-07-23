@@ -28,7 +28,7 @@ import {math} from './../utilities/math';
 import {palettes} from './../utilities/palettes';
 
 // Wind velocity at which particle intensity is maximum (m/s).
-const MAX_WIND_INTENSITY = 30;
+// const MAX_WIND_INTENSITY = 30;
 
 // Max number of frames a particle is drawn before regeneration.
 const MAX_PARTICLE_AGE = 100;
@@ -83,7 +83,9 @@ export class Renderer {
       // Line width of a drawn particle.
       particleWidth: 2,
       // Reduce particle count to this fraction (improves FPS).
-      particleReduction: 0.1
+      particleReduction: 0.1,
+      // Wind velocity at which particle intensity is maximum (m/s).
+      maxWindIntensity: 30
     };
 
     // Determine the context type.
@@ -407,7 +409,7 @@ export class Renderer {
     this.config_.colorScheme.indexFor = (m) => {  // map wind speed to a style
       const length = this.config_.colorScheme.length - 1;
       return Math.floor(
-        Math.min(m, MAX_WIND_INTENSITY) / MAX_WIND_INTENSITY * length);
+        Math.min(m, this.config_.maxWindIntensity) / this.config_.maxWindIntensity * length);
     };
 
     this.rgbColorScheme_ = {
@@ -457,7 +459,7 @@ export class Renderer {
    * @return {!Array<!Array<string, number>>} [hexColor, velocity]
    */
   velocityScale() {
-    const increment = MAX_WIND_INTENSITY / this.config_.colorScheme.length;
+    const increment = this.config_.maxWindIntensity / this.config_.colorScheme.length;
     return this.config_.colorScheme.map((color, idx) => {
       idx += 1;
       let value = idx * increment;

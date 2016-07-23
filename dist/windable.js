@@ -315,7 +315,7 @@ var _palettes = require('./../utilities/palettes');
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Wind velocity at which particle intensity is maximum (m/s).
-var MAX_WIND_INTENSITY = 30;
+// const MAX_WIND_INTENSITY = 30;
 
 // Max number of frames a particle is drawn before regeneration.
 var MAX_PARTICLE_AGE = 100;
@@ -371,7 +371,9 @@ var Renderer = exports.Renderer = function () {
       // Line width of a drawn particle.
       particleWidth: 2,
       // Reduce particle count to this fraction (improves FPS).
-      particleReduction: 0.1
+      particleReduction: 0.1,
+      // Wind velocity at which particle intensity is maximum (m/s).
+      maxWindIntensity: 30
     };
 
     // Determine the context type.
@@ -725,7 +727,7 @@ var Renderer = exports.Renderer = function () {
       this.config_.colorScheme.indexFor = function (m) {
         // map wind speed to a style
         var length = _this4.config_.colorScheme.length - 1;
-        return Math.floor(Math.min(m, MAX_WIND_INTENSITY) / MAX_WIND_INTENSITY * length);
+        return Math.floor(Math.min(m, _this4.config_.maxWindIntensity) / _this4.config_.maxWindIntensity * length);
       };
 
       this.rgbColorScheme_ = {
@@ -779,7 +781,7 @@ var Renderer = exports.Renderer = function () {
     value: function velocityScale() {
       var _this5 = this;
 
-      var increment = MAX_WIND_INTENSITY / this.config_.colorScheme.length;
+      var increment = this.config_.maxWindIntensity / this.config_.colorScheme.length;
       return this.config_.colorScheme.map(function (color, idx) {
         idx += 1;
         var value = idx * increment;
@@ -1144,7 +1146,6 @@ var WindMap = exports.WindMap = function () {
    *
    * @param {!ConfigPayload} config An instance of ConfigPayload.
    */
-
   function WindMap(config) {
     var _this = this;
 
